@@ -47,38 +47,55 @@ services:
     container_name: api
     restart: always
     image: bakingbad/bcdhub-api:${TAG:-latest}
+    command: -f config.yml -f config.box.yml
     environment: 
       - GIN_MODE=release
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
     depends_on:
       - elastic
       - db
     ports:
       - 127.0.0.1:14000:14000
+    extra_hosts:
+      sandbox: 172.17.0.1
     logging: *my-logging
 
   indexer:
     container_name: indexer
     restart: always
     image: bakingbad/bcdhub-indexer:${TAG:-latest}
+    command: -f config.yml -f config.box.yml
     environment: 
       - GIN_MODE=release
-      - CONFIG_FILE=config-sandbox.json
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - RABBIT_USER=guest
+      - RABBIT_PASSWORD=guest
     depends_on:
       - elastic
       - mq
+    extra_hosts:
+      sandbox: 172.17.0.1
     logging: *my-logging
 
   metrics:
     container_name: metrics
     restart: always
     image: bakingbad/bcdhub-metrics:${TAG:-latest}
+    command: -f config.yml -f config.box.yml
     environment: 
       - GIN_MODE=release
-      - CONFIG_FILE=config-sandbox.json
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - RABBIT_USER=guest
+      - RABBIT_PASSWORD=guest
     depends_on:
       - elastic
       - mq
       - db
+    extra_hosts:
+      sandbox: 172.17.0.1
     logging: *my-logging
 
   gui:
@@ -91,15 +108,16 @@ services:
       - 127.0.0.1:8080:80
     logging: *my-logging
 
-  sandbox:
-    container_name: sandbox
+  flextesa:
+    container_name: flextesa
     restart: always
     image: registry.gitlab.com/tezos/flextesa:image-tutobox-run
     command: carthagebox start
     environment:
       - block_time=4
     ports:
-      - 127.0.0.1:8732:20000
+      - 127.0.0.1:20000:20000
+      - 172.17.0.1:8732:20000
     logging: *my-logging
 
 volumes:
