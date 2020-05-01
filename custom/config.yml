@@ -1,0 +1,72 @@
+rpc:
+    mainnet:
+        uri: https://mainnet.tezos.org.ua
+        timeout: 20
+    zeronet:
+        uri: https://rpc.tzkt.io/zeronet
+        timeout: 20
+    carthagenet:
+        uri: https://carthatest-ssl.tezos.org.ua
+        timeout: 20
+    sandboxnet:
+        uri: http://sandbox:8732
+        timeout: 10
+
+tzkt:
+    mainnet:
+        uri: https://api.tzkt.io/v1/
+        services_uri: https://services.tzkt.io/v1/
+        timeout: 20
+    zeronet:
+        uri: https://api.zeronet.tzkt.io/v1/
+        services_uri: https://services.tzkt.io/zeronet/v1/
+        timeout: 20
+    carthagenet:
+        uri: https://api.carthage.tzkt.io/v1/
+        services_uri: https://services.tzkt.io/carthagenet/v1/
+        timeout: 20
+
+share:
+    path: /etc/bcd
+
+elastic:
+    uri: http://elastic:9200
+
+rabbitmq:
+    uri: "amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@mq:5672/"
+    queues:
+        - operations
+        - contracts
+        - migrations
+        - recalc
+
+db:
+    conn_string: "host=db port=5432 user=${POSTGRES_USER} dbname=bcd password=${POSTGRES_PASSWORD} sslmode=disable"
+
+api:
+    bind: ":14000"
+    oauth:
+        enabled: false
+    sentry:
+        enabled: false
+    networks:
+        - mainnet
+        - carthagenet
+        - zeronet
+        - sandboxnet
+
+indexer:
+    sentry:
+        enabled: false
+    networks:
+        mainnet:
+          boost: tzkt
+        carthagenet:
+          boost: tzkt
+        zeronet:
+          boost: tzkt
+        sandboxnet:
+
+metrics:
+    sentry:
+        enabled: false

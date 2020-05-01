@@ -1,13 +1,21 @@
-devkit:
-	docker-compose -f docker-compose.yml -f docker-compose.devkit.yml up -d
+.PHONY: bbbox custom
 
 bcd:
 	docker-compose up -d
 
-clear:
-	docker volume rm bcdbox_mqdata
-	docker volume rm bcdbox_esdata
+bcd-stop:
+	docker-compose down
+
+bcd-clear:
+	docker volume rm bbbox_mqdata
+	docker volume rm bbbox_esdata
+
+bbbox:
+	docker-compose -f docker-compose.yml -f docker-compose.bbbox.yml up -d
+
+custom:
+	docker-compose -f docker-compose.yml -f docker-compose.custom.yml up -d
 
 drop:
 	docker-compose down --remove-orphans
-	$(MAKE) clear
+	$(MAKE) bcd-clear
