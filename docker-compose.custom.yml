@@ -16,7 +16,7 @@ services:
     volumes:
       - ./custom/config.yml:/app/api/config.yml
     env_file:
-      - ./custom/.env
+      - .env
     environment: 
       - GIN_MODE=release
     command: -f config.yml
@@ -26,7 +26,7 @@ services:
     volumes:
       - ./custom/config.yml:/app/indexer/config.yml
     env_file:
-      - ./custom/.env
+      - .env
     environment: 
       - GIN_MODE=release
     command: -f config.yml
@@ -35,7 +35,7 @@ services:
     volumes:
       - ./custom/config.yml:/app/metrics/config.yml
     env_file:
-      - ./custom/.env
+      - .env
     environment: 
       - GIN_MODE=release
     command: -f config.yml
