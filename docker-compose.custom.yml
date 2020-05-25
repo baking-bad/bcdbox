@@ -12,6 +12,11 @@ services:
         max-size: 10m
         max-file: "5"
 
+  elastic:
+    ports:
+      - 127.0.0.1:9400:9200
+      - 127.0.0.1:9500:9300
+
   api:
     volumes:
       - ./custom/config.yml:/app/api/config.yml
@@ -20,7 +25,6 @@ services:
     environment: 
       - GIN_MODE=release
     command: -f config.yml
-    ports: []
 
   indexer:
     volumes:
