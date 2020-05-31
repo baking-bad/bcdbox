@@ -23,7 +23,7 @@ share:
     path: /etc/bcd
 
 sentry:
-    environment: production
+    environment: staging
     uri: ${SENTRY_DSN}
     debug: false
 
