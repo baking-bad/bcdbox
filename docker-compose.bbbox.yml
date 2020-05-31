@@ -20,10 +20,12 @@ services:
     restart: always
     image: bakingbad/michelson-kernel
     command: "--NotebookApp.allow_origin=* \
-      --NotebookApp.base_url=/jupyter/ \
-      --NotebookApp.default_url=/jupyter/tree/notebooks \
+      --NotebookApp.port=8008 \
+      --NotebookApp.default_url=/tree/notebooks \
       --NotebookApp.disable_check_xsrf=True \
       --NotebookApp.token="
+    ports:
+      - 127.0.0.1:8008:8008
     volumes:
       - ./notebooks:/home/jupyter/notebooks
     extra_hosts:

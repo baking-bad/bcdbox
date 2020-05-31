@@ -10,6 +10,7 @@ bcd-stop:
 bcd-clear:
 	docker volume rm bbbox_mqdata
 	docker volume rm bbbox_esdata
+	docker volume rm bbbox_db
 
 bbbox:
 	docker-compose pull
@@ -21,3 +22,9 @@ custom:
 drop:
 	docker-compose down --remove-orphans
 	$(MAKE) bcd-clear
+
+aliases:
+	docker exec -it api aliases
+
+migration:
+	docker exec -it api migration
