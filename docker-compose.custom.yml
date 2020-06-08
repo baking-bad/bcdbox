@@ -1,17 +1,5 @@
 version: "3.6"
 services:
-  flextesa:
-    container_name: flextesa
-    restart: always
-    image: registry.gitlab.com/tezos/flextesa:image-tutobox-run
-    command: carthagebox start
-    environment:
-      - block_time=5
-    logging: &my-logging
-      options:
-        max-size: 10m
-        max-file: "5"
-
   elastic:
     ports:
       - 127.0.0.1:9400:9200
