@@ -99,3 +99,7 @@ metrics:
     sentry:
         enabled: true
         project: metrics
+
+aws:
+    bucket_name: ${BCD_AWS_BUCKET_NAME}
+    region: ${BCD_AWS_REGION}
