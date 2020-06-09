@@ -39,5 +39,5 @@ services:
     command: -c "nginx -g 'daemon off;'"
 
   aws:
-    bucket_name: bcd-elastic-snapshots
-    region: eu-central-1
+    bucket_name: ${BCD_AWS_BUCKET_NAME}
+    region: ${BCD_AWS_REGION}
