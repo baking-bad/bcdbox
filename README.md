@@ -1,7 +1,7 @@
 # Baking Bad IDE
-A customizable local development environment.
+Customizable interactive development environment.
 
-## Better Call Dev + Your sandbox node
+## 🏖 Better Call Dev + Your sandbox node
 1. Ensure your sandbox node is exposed at `172.17.0.1:8732`
 2. Make sure ports `8000` and `42000` are not in use
 3. Launch BCD (will be available at https://localhost:8000)
@@ -17,7 +17,7 @@ make bcd-stop
 make bcd-clear
 ```
 
-## Better Call Dev + Flextesa + Jupyter
+## 🐍 Better Call Dev + Flextesa + Jupyter
 1. Launch BCD
 ```
 make bbbox
@@ -27,7 +27,7 @@ make bbbox
 make drop
 ```
 
-## Better Call Dev staging `you.better-call.dev`
+## ☠️ Better Call Dev staging `you.better-call.dev`
 1. Create and fill `.env` file (see https://github.com/baking-bad/bcdhub#environment-variables-env)
 2. Launch BCD
 ```
