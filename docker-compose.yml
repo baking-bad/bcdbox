@@ -21,6 +21,9 @@ services:
     restart: always
     volumes:
       - mqdata:/var/lib/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
     logging: *my-logging        
 
   db:
@@ -44,8 +47,9 @@ services:
       - GIN_MODE=release
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
-      - RABBIT_USER=guest
-      - RABBIT_PASSWORD=guest
+      - POSTGRES_DB=bcd
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
     depends_on:
       - elastic
       - db
@@ -65,8 +69,9 @@ services:
       - GIN_MODE=release
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
-      - RABBIT_USER=guest
-      - RABBIT_PASSWORD=guest
+      - POSTGRES_DB=bcd
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
     depends_on:
       - elastic
       - mq
@@ -83,8 +88,9 @@ services:
       - GIN_MODE=release
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
-      - RABBIT_USER=guest
-      - RABBIT_PASSWORD=guest
+      - POSTGRES_DB=bcd
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
     depends_on:
       - elastic
       - mq
