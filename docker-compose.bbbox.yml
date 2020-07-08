@@ -1,5 +1,20 @@
 version: "3.6"
 services:
+  api:
+    command: -f config.yml -f config.box.yml -f config.bbbox.yml
+    volumes:
+      - ./bbbox/config.yml:/app/api/config.bbbox.yml
+
+  indexer:
+    command: -f config.yml -f config.box.yml -f config.bbbox.yml
+    volumes:
+      - ./bbbox/config.yml:/app/indexer/config.bbbox.yml
+
+  metrics:
+    command: -f config.yml -f config.box.yml -f config.bbbox.yml
+    volumes:
+      - ./bbbox/config.yml:/app/metrics/config.bbbox.yml
+
   flextesa:
     container_name: flextesa
     restart: always
@@ -9,7 +24,6 @@ services:
       - block_time=4
     ports:
       - 127.0.0.1:8732:20000
-      - 172.17.0.1:8732:20000
     logging: &my-logging
       options:
         max-size: 10m

@@ -13,15 +13,14 @@ bcd-clear:
 	docker volume rm bbbox_db
 
 bbbox:
-	TAG=2.5 docker-compose pull
+	#TAG=2.5 docker-compose pull
 	TAG=2.5 docker-compose -f docker-compose.yml -f docker-compose.bbbox.yml up -d
 
 custom:
 	docker-compose -f docker-compose.yml -f docker-compose.custom.yml up -d
 
 drop:
-	docker-compose down --remove-orphans
-	$(MAKE) bcd-clear
+	docker-compose down --remove-orphans -v
 
 aliases:
 	docker exec -it api aliases
