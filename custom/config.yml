@@ -96,6 +96,18 @@ metrics:
         enabled: true
         project: metrics
 
+compiler:
+    aws:
+        bucket_name: bcd-contract-sources
+        region: eu-central-1
+        access_key_id: ${AWS_ACCESS_KEY_ID}
+        secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+    sentry:
+        enabled: true
+        project: compiler
+
 aws:
-    bucket_name: ${BCD_AWS_BUCKET_NAME}
-    region: ${BCD_AWS_REGION}
+    access_key_id: ${AWS_ACCESS_KEY_ID}
+    secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+    bucket_name: bcd-elastic-snapshots
+    region: eu-central-1
