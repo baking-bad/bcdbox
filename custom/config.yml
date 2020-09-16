@@ -16,14 +16,17 @@ tzkt:
     mainnet:
         uri: https://api.tzkt.io/v1/
         services_uri: https://services.tzkt.io/v1/
+        base_uri: https://tzkt.io/
         timeout: 20
     delphinet:
         uri: https://api.delphi.tzkt.io/v1/
         services_uri: https://services.tzkt.io/delphinet/v1/
+        base_uri: https://delphi.tzkt.io/
         timeout: 20
     carthagenet:
         uri: https://api.carthage.tzkt.io/v1/
         services_uri: https://services.tzkt.io/carthagenet/v1/
+        base_uri: https://carthage.tzkt.io/
         timeout: 20
 
 share:
@@ -54,34 +57,30 @@ elastic:
 
 rabbitmq:
     uri: "amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@mq:5672/"
-    queues:
-        - operations
-        - contracts
-        - migrations
-        - recalc
-        - compilations
 
 db:
     conn_string: "host=db port=5432 user=${POSTGRES_USER} dbname=bcd password=${POSTGRES_PASSWORD} sslmode=disable"
 
 api:
+    project_name: api
     bind: ":42000"
     swagger_host: "you.better-call.dev"
     oauth:
         enabled: true
     sentry:
         enabled: true
-        project: api
     networks:
         - mainnet
         - carthagenet
         - delphinet
         - dalphanet
+    queues:
+        - operations
 
 indexer:
+    project_name: indexer
     sentry:
         enabled: true
-        project: indexer
     networks:
         mainnet:
             boost: tzkt
@@ -92,11 +91,18 @@ indexer:
         dalphanet:
 
 metrics:
+    project_name: metrics
     sentry:
         enabled: true
-        project: metrics
+    queues:
+        - operations
+        - contracts
+        - migrations
+        - recalc
+        - transfers
 
 compiler:
+    project_name: compiler
     aws:
         bucket_name: bcd-contract-sources
         region: eu-central-1
@@ -104,7 +110,8 @@ compiler:
         secret_access_key: ${AWS_SECRET_ACCESS_KEY}
     sentry:
         enabled: true
-        project: compiler
+    queues:
+        - compilations
 
 aws:
     access_key_id: ${AWS_ACCESS_KEY_ID}
