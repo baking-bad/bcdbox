@@ -57,6 +57,7 @@ elastic:
 
 rabbitmq:
     uri: "amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@mq:5672/"
+    publisher: true
 
 db:
     conn_string: "host=db port=5432 user=${POSTGRES_USER} dbname=bcd password=${POSTGRES_PASSWORD} sslmode=disable"
