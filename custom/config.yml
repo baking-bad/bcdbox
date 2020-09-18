@@ -75,11 +75,12 @@ api:
         - delphinet
         - dalphanet
     queues:
-        - operations
+        operations:
+            non_durable: true
+            auto_deleted: true
 
 indexer:
     project_name: indexer
-    skip_delegator_blocks: true
     sentry:
         enabled: true
     networks:
@@ -96,11 +97,11 @@ metrics:
     sentry:
         enabled: true
     queues:
-        - operations
-        - contracts
-        - migrations
-        - recalc
-        - transfers
+        operations:
+        contracts:
+        migrations:
+        recalc:
+        transfers:
 
 compiler:
     project_name: compiler
@@ -112,7 +113,7 @@ compiler:
     sentry:
         enabled: true
     queues:
-        - compilations
+        compilations:
 
 aws:
     access_key_id: ${AWS_ACCESS_KEY_ID}
