@@ -1,8 +1,5 @@
 TAG=2.6
  
-include .env
-export $(shell sed 's/=.*//' .env)
-
 .PHONY: bbbox custom
 
 bcd:
@@ -51,7 +48,7 @@ db-dump:
 	docker exec -it db pg_dump -c bcd > dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql
 
 db-restore:
-	docker exec -i db psql --username $$POSTGRES_USER -v ON_ERROR_STOP=on bcd < $(BACKUP)
+	docker exec -i db psql --username $(USER) -v ON_ERROR_STOP=on bcd < $(BACKUP)
 
 ps:
 	docker ps --format "table {{.Names}}\t{{.RunningFor}}\t{{.Status}}\t{{.Ports}}"
