@@ -31,18 +31,18 @@ migration:
 	docker exec -it api migration
 
 s3-creds:
-	docker exec -it elastic bash -c 'bin/elasticsearch-keystore add --stdin s3.client.default.access_key <<< "$$AWS_ACCESS_KEY_ID"'
-	docker exec -it elastic bash -c 'bin/elasticsearch-keystore add --stdin s3.client.default.secret_key <<< "$$AWS_SECRET_ACCESS_KEY"'
-	docker exec -it api es-aws -a reload_secure_settings
+	docker exec -it elastic bash -c 'bin/elasticsearch-keystore add --force --stdin s3.client.default.access_key <<< "$$AWS_ACCESS_KEY_ID"'
+	docker exec -it elastic bash -c 'bin/elasticsearch-keystore add --force --stdin s3.client.default.secret_key <<< "$$AWS_SECRET_ACCESS_KEY"'
+	docker exec -it api esctl reload_secure_settings
 
 s3-repo:
-	docker exec -it api es-aws -a create_repository
+	docker exec -it api esctl create_repository
 
 s3-restore:
-	docker exec -it api es-aws -a restore
+	docker exec -it api esctl restore
 
 s3-snapshot:
-	docker exec -it api es-aws -a snapshot
+	docker exec -it api esctl snapshot
 
 db-dump:
 	docker exec -it db pg_dump -c bcd > dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql

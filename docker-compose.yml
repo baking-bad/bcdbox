@@ -28,7 +28,7 @@ services:
 
   db:
     container_name: db
-    image: postgres:latest
+    image: postgres:12
     restart: always
     environment:
       - POSTGRES_USER=root
@@ -36,6 +36,10 @@ services:
       - POSTGRES_DB=bcd
     volumes:
       - db:/var/lib/postgresql/data
+    db:
+      ports:
+        - 127.0.0.1:5433:5432
+
     logging: *my-logging
 
   api:
